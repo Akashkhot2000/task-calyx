@@ -322,55 +322,110 @@ class _HomescreenState extends State<Homescreen> {
                                   ),
                                 ),
                               ),
+                              SizedBox(
+                                height: 10,
+                              ),
                               Card(
                                 child: Padding(
-                                  padding: EdgeInsets.all(15),
+                                  padding: const EdgeInsets.all(12),
                                   child: Column(
                                     children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'Transfer Fees',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.black87,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                          Text(
-                                            "${exchangeRateState.rates.isNotEmpty ? exchangeRateState.rates[0].transferFeesGBP.toString() : ""}  ${exchangeRateState.rates.isNotEmpty ? state.countries[0].countryCurrency : ""}",
-                                            style: TextStyle(fontSize: 15),
-                                          )
-                                        ],
+                                      Padding(
+                                        padding: const EdgeInsets.all(15),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'Transfer Fees',
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Colors.black87,
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ),
+                                                Text(
+                                                  "${exchangeRateState.rates.isNotEmpty ? exchangeRateState.rates[0].transferFeesGBP.toString() : ""}  ${exchangeRateState.rates.isNotEmpty ? state.countries[0].countryCurrency : ""}",
+                                                  style:
+                                                      TextStyle(fontSize: 15),
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(height: 5),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'Exchange Rate',
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Colors.black87,
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ),
+                                                Text(
+                                                  ' ${exchangeRateState.rates.isNotEmpty ? exchangeRateState.rates[0].foreignCurrencyMaxAmount : ""} ${exchangeRateState.rates.isNotEmpty ? exchangeRateState.rates[0].currencyCode : ""}',
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Colors.black54,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      SizedBox(height: 5),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'Exchange Rate',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.black87,
-                                                fontWeight: FontWeight.w600),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: Colors.black12,
+                                            borderRadius:
+                                                BorderRadius.circular(6)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 15, vertical: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                'Total Amount To Pay',
+                                                style: TextStyle(
+                                                    fontSize: 17,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
+                                              const Spacer(),
+                                              Padding(
+                                                padding: EdgeInsets.all(8.0),
+                                                child: Text(
+                                                  '3.00',
+                                                  style:
+                                                      TextStyle(fontSize: 15),
+                                                ),
+                                              ),
+                                              Text(
+                                                "${exchangeRateState.rates.isNotEmpty ? state.countries[0].countryCurrency : ""}",
+                                                style: TextStyle(fontSize: 15),
+                                              )
+                                            ],
                                           ),
-                                          Text(
-                                            ' ${exchangeRateState.rates.isNotEmpty ? exchangeRateState.rates[0].foreignCurrencyMaxAmount : ""} ${exchangeRateState.rates.isNotEmpty ? exchangeRateState.rates[0].currencyCode : ""}',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.black54,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                        ],
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
                               ),
                               SizedBox(
-                                height: 50,
+                                height: 30,
                               ),
                               CustomButton(
                                 onPressed: () {},
