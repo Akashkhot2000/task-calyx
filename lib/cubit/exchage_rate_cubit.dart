@@ -38,19 +38,19 @@ class ExchangeRateCubit extends Cubit<ExchangeRateState> {
 
   ExchangeRateCubit() : super(ExchangeRateInitial());
 
-  Future<void> fetchExchangeRates(String branchID) async {
+  Future<void> fetchExchangeRates(
+      String countryID, String currencyCode) async {
     emit(ExchangeRateLoading());
     const url =
         'https://currencyexchangesoftware.eu/pilot/api/checkrateslistcountry/checkrateslistcountry';
     final body = {
       "clientID": "1",
-      "countryID": "6",
+      "countryID": countryID,
       "paymentTypeID": "1",
       "paymentDepositTypeID": "1",
       "deliveryTypeID": "3",
-      "currencyCode": "NGN",
+      "currencyCode": currencyCode,
       "branchID": "2",
-      // "branchID": branchID,
       "BaseCurrencyID": "22"
     };
 
@@ -114,6 +114,6 @@ class ExchangeRate {
   String get fullFlagUrl {
     return countryFlag.isNotEmpty
         ? 'https://currencyexchangesoftware.eu/pilot/api/country/countrylist/$countryFlag'
-        : 'https://via.placeholder.com/15'; 
+        : 'https://via.placeholder.com/15';
   }
 }

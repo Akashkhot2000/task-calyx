@@ -20,10 +20,7 @@ class _BottomNavState extends State<BottomNav> {
   void initState() {
     super.initState();
     _pages = [
-      Homescreen(
-        user: widget.user,
-        userId: widget.userId,
-      ), // Home screen
+      Homescreen(), // Home screen
       const Center(child: Text('Search Page', style: TextStyle(fontSize: 24))),
       const Center(
           child: Text('Notifications Page', style: TextStyle(fontSize: 24))),
