@@ -114,6 +114,6 @@ class ExchangeRate {
   String get fullFlagUrl {
     return countryFlag.isNotEmpty
         ? 'https://currencyexchangesoftware.eu/pilot/api/country/countrylist/$countryFlag'
-        : 'https://via.placeholder.com/15'; // Placeholder URL for missing flag
+        : 'https://via.placeholder.com/15'; 
   }
 }

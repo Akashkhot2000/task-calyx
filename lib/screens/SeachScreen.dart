@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task/cubit/country_cubit.dart'; // Import the CountryCubit
-import 'package:task/models/country_model.dart'; // Import the Country model
+import 'package:task/cubit/country_cubit.dart';
+import 'package:task/models/country_model.dart';
 
 class SeachScreen extends StatefulWidget {
   final Country country;
@@ -36,7 +36,7 @@ class _SeachScreenState extends State<SeachScreen> {
             border: InputBorder.none,
             hintStyle: TextStyle(color: Colors.white.withOpacity(0.7)),
           ),
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
       ),
       body: BlocBuilder<CountryCubit, CountryState>(
@@ -44,7 +44,6 @@ class _SeachScreenState extends State<SeachScreen> {
           if (state is CountryLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is CountryLoaded) {
-            // Cache the country list when it's loaded
             if (_allCountries.isEmpty) {
               _allCountries = state.countries;
               _filteredCountries = _allCountries;
@@ -55,17 +54,13 @@ class _SeachScreenState extends State<SeachScreen> {
               itemBuilder: (context, index) {
                 final country = _filteredCountries[index];
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black12,
-                    ),
+                  padding: const EdgeInsets.all(2),
+                  child: Card(
                     child: ListTile(
                       title: Text(country.countryName),
                       subtitle: Text(country.countryCurrency),
                       trailing: Text(country.countryCode),
                       onTap: () {
-                        // Return selected country back to the previous screen
                         Navigator.pop(context, country);
                       },
                     ),

@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task/cubit/user_cubit.dart';
 import 'package:task/cubit/user_state.dart';
-import 'package:task/models/user_model.dart';
-import 'package:go_router/go_router.dart';
-import 'package:task/screens/bottonNav.dart'; // Import go_router
+import 'package:task/screens/bottonNav.dart'; 
 
 class userscreen extends StatefulWidget {
   const userscreen({super.key});
@@ -44,7 +42,7 @@ class _userscreenState extends State<userscreen> {
       create: (_) => userCubit,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('List Of the users'),
+          title: const Text('List Of the users'),
         ),
         body: BlocBuilder<UserCubit, UserState>(
           builder: (context, state) {
@@ -74,7 +72,6 @@ class _userscreenState extends State<userscreen> {
                           ),
                           title: Text('${user.firstName} ${user.lastName}'),
                           onTap: () {
-                            // context.push('/bottomNav', extra: user,);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -82,7 +79,7 @@ class _userscreenState extends State<userscreen> {
                                   user: user,
                                   userId: (index + 1)
                                       .toString(), 
-                                ), // Pass userId to BottomNav
+                                ), 
                               ),
                             );
                           },

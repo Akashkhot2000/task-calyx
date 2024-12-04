@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task/cubit/country_cubit.dart';
 import 'package:task/cubit/exchage_rate_cubit.dart';
 import 'package:task/cubit/user_cubit.dart';
-import 'package:task/router/router.dart';
 import 'package:task/screens/userScreen.dart';
 
 void main() {
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
           create: (_) => CountryCubit(),
         ),
         BlocProvider<ExchangeRateCubit>(
-          create: (_) => ExchangeRateCubit(), // Pass Dio instance here
+          create: (_) => ExchangeRateCubit(), 
         ),
       ],
       child: MaterialApp(
@@ -39,7 +38,6 @@ class MyApp extends StatelessWidget {
           textTheme:
               const TextTheme(bodyMedium: TextStyle(color: Colors.black)),
         ),
-        // routerConfig: AppRouter.router,
         home: userscreen(),
       ),
     );
