@@ -15,12 +15,12 @@ class ExchangeRateInitial extends ExchangeRateState {}
 class ExchangeRateLoading extends ExchangeRateState {}
 
 class ExchangeRateLoaded extends ExchangeRateState {
-  final List<ExchangeRate> rates;
+  final ExchangeRate rate;
 
-  ExchangeRateLoaded(this.rates);
+  ExchangeRateLoaded(this.rate);
 
   @override
-  List<Object?> get props => [rates];
+  List<Object?> get props => [rate];
 }
 
 class ExchangeRateError extends ExchangeRateState {
@@ -38,8 +38,7 @@ class ExchangeRateCubit extends Cubit<ExchangeRateState> {
 
   ExchangeRateCubit() : super(ExchangeRateInitial());
 
-  Future<void> fetchExchangeRates(
-      String countryID, String currencyCode) async {
+  Future<void> fetchExchangeRates(String countryID, String currencyCode) async {
     emit(ExchangeRateLoading());
     const url =
         'https://currencyexchangesoftware.eu/pilot/api/checkrateslistcountry/checkrateslistcountry';
@@ -53,16 +52,21 @@ class ExchangeRateCubit extends Cubit<ExchangeRateState> {
       "branchID": "2",
       "BaseCurrencyID": "22"
     };
-
+    log("Request Body: $body");
     try {
       final response = await _dio.post(url, data: body);
 
-      if (response.data['response'] == true) {
+      if (response.data['response'] == true && response.data['data'] is List) {
         final List<dynamic> data = response.data['data'];
-        final rates = data.map((json) => ExchangeRate.fromJson(json)).toList();
-        emit(ExchangeRateLoaded(rates));
+        if (data.isNotEmpty) {
+          final firstRate = ExchangeRate.fromJson(data.first);
+          emit(ExchangeRateLoaded(firstRate));
+        } else {
+          emit(ExchangeRateError('No exchange rate data found'));
+        }
       } else {
-        final errorMessage = response.data['data'] ?? 'Unknown error';
+        final errorMessage =
+            response.data['data'] ?? 'Unexpected response structure';
         emit(ExchangeRateError('Failed to fetch rates: $errorMessage'));
       }
     } catch (e) {

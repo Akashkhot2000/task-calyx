@@ -1,11 +1,10 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task/cubit/country_cubit.dart';
 import 'package:task/cubit/exchage_rate_cubit.dart';
 import 'package:task/cubit/user_cubit.dart';
-import 'package:task/screens/homescreen.dart';
-import 'package:task/screens/userScreen.dart';
+import 'package:task/screens/SeachScreen.dart'; // Import Search Screen
+import 'package:task/screens/homescreen.dart'; // Import Home Screen
 
 void main() {
   runApp(const MyApp());
@@ -39,7 +38,8 @@ class MyApp extends StatelessWidget {
           textTheme:
               const TextTheme(bodyMedium: TextStyle(color: Colors.black)),
         ),
-        home: const Homescreen(),
+        // Decide which screen to show first
+        home: const SeachScreen(), // Replace with Homescreen() if you prefer
       ),
     );
   }

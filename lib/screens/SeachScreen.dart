@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task/cubit/country_cubit.dart';
-import 'package:task/models/country_model.dart';
+import 'package:task/screens/homescreen.dart';
 
 class SeachScreen extends StatefulWidget {
-  final Country country;
-  const SeachScreen({super.key, required this.country});
+  const SeachScreen({super.key});
 
   @override
   State<SeachScreen> createState() => _SeachScreenState();
@@ -19,7 +18,7 @@ class _SeachScreenState extends State<SeachScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<CountryCubit>().fetchCountryList("");
+    context.read<CountryCubit>().fetchCountryList();
   }
 
   @override
@@ -61,7 +60,14 @@ class _SeachScreenState extends State<SeachScreen> {
                       subtitle: Text(country.countryCurrency),
                       trailing: Text(country.countryCode),
                       onTap: () {
-                        Navigator.pop(context, country);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Homescreen(
+                              country: country,
+                            ),
+                          ),
+                        );
                       },
                     ),
                   ),
