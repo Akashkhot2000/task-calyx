@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:task/common_component.dart';
 import 'package:task/cubit/country_cubit.dart';
 import 'package:task/cubit/exchage_rate_cubit.dart';
@@ -45,10 +46,19 @@ class _HomescreenState extends State<Homescreen> {
               child: BlocBuilder<ExchangeRateCubit, ExchangeRateState>(
                 builder: (context, state) {
                   if (state is ExchangeRateLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return Center(
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width,
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    );
                   } else if (state is ExchangeRateLoaded) {
                     final exchangeRate = state.rate;
                     return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Padding(
@@ -285,7 +295,17 @@ class _HomescreenState extends State<Homescreen> {
                       ],
                     );
                   } else if (state is ExchangeRateError) {
-                    return Text('Error: ${state.message}');
+                    // Show toast message
+                    Fluttertoast.showToast(
+                        msg: 'Error: ${state.message}',
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                    Navigator.pop(context);
+                    return Text(state.message);
                   } else {
                     return const Text('No data available');
                   }
